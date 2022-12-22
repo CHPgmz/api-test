@@ -34,21 +34,13 @@ router.post("/api/proyectos", (req, res) => {
       nombre_proyecto,
       tipo_proyecto,
       descripcion_proyecto,
-      hora,
-      fecha,
-      nom_colaborador,
-      nom_actividades,
+      fechaini,
+      fechafin
    } = req.body;
    con.query(
-      "INSERT INTO proyectos (nombre_proyecto, tipo_proyecto, descripcion_proyecto, hora, fecha,nom_colaborador, nom_actividades) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO proyectos (nombre_proyecto, tipo_proyecto, descripcion_proyecto, fechaini, fechafin) VALUES (?, ?, ?, ?, ?)",
       [
-         nombre_proyecto,
-         tipo_proyecto,
-         descripcion_proyecto,
-         hora,
-         fecha,
-         nom_colaborador,
-         nom_actividades,
+         nombre_proyecto, tipo_proyecto, descripcion_proyecto, fechaini, fechafin
       ],
       (error, results) => {
          if (error) {
@@ -76,25 +68,12 @@ router.post("/api/proyectos", (req, res) => {
 router.put("/api/proyectos/:id", (req, res) => {
    const id = req.params.id;
    const {
-      nombre_proyecto,
-      tipo_proyecto,
-      descripcion_proyecto,
-      hora,
-      fecha,
-      nom_colaborador,
-      nom_actividades,
+      nombre_proyecto, tipo_proyecto, descripcion_proyecto, fechaini, fechafin
    } = req.body;
    con.query(
-      "UPDATE proyectos SET nombre_proyecto = ?, tipo_proyecto = ?, descripcion_proyecto = ?, hora = ?, fecha = ?, nom_colaborador = ?, nom_actividades = ? WHERE id_proyecto = ?",
+      "UPDATE proyectos SET nombre_proyecto = ?, tipo_proyecto = ?, descripcion_proyecto = ?, fechaini = ?, fechafin = ? WHERE id_proyecto = ?",
       [
-         nombre_proyecto,
-         tipo_proyecto,
-         descripcion_proyecto,
-         hora,
-         fecha,
-         nom_colaborador,
-         nom_actividades,
-         id,
+         nombre_proyecto, tipo_proyecto, descripcion_proyecto, fechaini, fechafin, id
       ],
       (error, results) => {
          if (error) {

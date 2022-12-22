@@ -33,11 +33,13 @@ router.get("/api/colaboradores/:id", (req, res) => {
 //Ruta para insertar un nuevo poryecto
 router.post("/api/colaboradores", (req, res) => {
    
-   const { id_proyecto, id_actividad, nom_colaborador, apellido, cargo_colaborador, fecha, hora, proyectos_id_proyecto, actividades_id_actividad } = req.body;
+   const { nom_colaborador, apellido, cargo_colaborador, fechaini, fechafin } = req.body;
+   const fecha1 = new Date(fechaini);
+   const fecha2 = new Date(fechafin);
 
    con.query(
-      "INSERT INTO colaboradores (id_proyecto, id_actividad, nom_colaborador, apellido, cargo_colaborador, fecha, hora, proyectos_id_proyecto, actividades_id_actividad) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [id_proyecto, id_actividad, nom_colaborador, apellido, cargo_colaborador, fecha, hora, proyectos_id_proyecto, actividades_id_actividad],
+      "INSERT INTO colaboradores (nom_colaborador, apellido, cargo_colaborador, fechaini, fechafin) VALUES (?, ?, ?, ?, ?)",
+      [nom_colaborador, apellido, cargo_colaborador, /* fecha1.toLocaleString() */fechaini, /* fecha2.toLocaleString() */fechafin],
       (error, results) => {
          if (error) {
             res.status(500).json({ message: error.message });
@@ -63,11 +65,11 @@ router.post("/api/colaboradores", (req, res) => {
 //Para actualizar los datos de un una actividad
 router.put("/api/colaboradores/:id", (req, res) => {
    const id = req.params.id;
-   const { id_proyecto, id_actividad, nom_colaborador, apellido, cargo_colaborador, fecha, hora, proyectos_id_proyecto, actividades_id_actividad } = req.body;
+   const { nom_colaborador, apellido, cargo_colaborador, fechaini, fechafin } = req.body;
 
    con.query(
-      "UPDATE colaboradores SET id_proyecto = ?, id_actividad = ?, nom_colaborador = ?, apellido = ?, cargo_colaborador = ?, fecha = ?, hora = ?, proyectos_id_proyecto = ?, actividades_id_actividad = ? WHERE id_colaborador = ?",
-      [id_proyecto, id_actividad, nom_colaborador, apellido, cargo_colaborador, fecha, hora, proyectos_id_proyecto, actividades_id_actividad, id],
+      "UPDATE colaboradores SET nom_colaborador = ?, apellido = ?, cargo_colaborador = ?, fechaini = ?, fechafin = ? WHERE id_colaborador = ?",
+      [nom_colaborador, apellido, cargo_colaborador, fechaini, fechafin, id],
       (error, results) => {
          if (error) {
             res.status(500).json({ message: error.message });
