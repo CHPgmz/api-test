@@ -15,6 +15,16 @@ router.get("/api/colaboradores", (req, res) => {
    });
 });
 
+router.get("/api/colaborador/todo", (req, res) => {
+   con.query("SELECT id_colaborador, nom_colaborador FROM colaboradores", (err, rows, fields) => {
+      if (!err) {
+         res.json(rows);
+      } else {
+         console.log(err);
+      }
+   });
+});
+
 router.get("/api/colaboradores/:id", (req, res) => {
    const id = req.params.id;
    con.query(

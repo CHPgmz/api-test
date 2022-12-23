@@ -13,6 +13,17 @@ router.get("/api/proyectos", (req, res) => {
    });
 });
 
+router.get("/api/proyectos/todo", (req, res) => {
+   con.query(" SELECT id_proyecto, nombre_proyecto FROM proyectos", (err, rows, fields) => {
+      if (!err) {
+         res.json(rows);
+      } else {
+         console.log(err);
+      }
+   });
+});
+
+
 router.get("/api/proyectos/:id", (req, res) => {
    const id = req.params.id;
    con.query(

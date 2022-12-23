@@ -1,0 +1,4 @@
+# flyctl launch added from .gitignore
+**/node_modules
+**/src/routes/getIP.js
+fly.toml
